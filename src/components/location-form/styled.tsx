@@ -33,6 +33,7 @@ export const Input = styled.input`
   border: none;
   padding: 2px 10px;
   color: black;
+  width: 100%;
   &:focus {
     outline: none;
   }
