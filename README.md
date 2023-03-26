@@ -1,3 +1,4 @@
 # pix4D-project
 
-This is my implementation of the assignment.
+This is an implementation of the Pix4D assignment.
+After cloning the repo, please run 'npm i'
