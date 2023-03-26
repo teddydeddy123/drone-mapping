@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import {useState } from 'react'
 import * as S from './styled'
 
 export const WelcomeMessage = () => {
   const [open, setOpen] = useState(true)
-  console.log('modal')
+  
   return (
     <S.ModalComponent
       visible={open}

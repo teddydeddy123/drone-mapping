@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction} from 'react'
 import * as S from './styled'
 
 type Props = {
@@ -8,7 +8,6 @@ type Props = {
 
 export const SideBar = ({ setSearchBar, setHistoryBar }: Props) => {
   const handleToggleSearch = () => setSearchBar((prevState) => !prevState)
-
   const handleToggleHistory = () => setHistoryBar((prevState) => !prevState)
 
   return (

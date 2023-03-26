@@ -26,24 +26,17 @@ type Props = {
 
 export const MapLayer = ({ searchBar, historyBar }: Props) => {
   const mapRef = useRef<typeof MapContainerType>(null)
-  const [position, setPosition] = useState<Coordinates>([
-    46.521374036700415, 6.632122224350363,
-  ]) // initial position
-  const [singlePathHistory, setSinglePathHistory] = useState<LocationHistory[]>(
-    [],
-  )
+  const [position, setPosition] = useState<Coordinates>([46.521374036700415, 6.632122224350363]) // initial position(Lausanne, as per brief)
+  const [singlePathHistory, setSinglePathHistory] = useState<LocationHistory[]>([])
   const [pathsHistory, setPathsHistory] = useState<LocationHistory[][]>([])
-  const [selectedPathIndex, setSelectedPathIndex] = useState<number | null>(
-    null,
-  ) // new state variable
+  const [selectedPathIndex, setSelectedPathIndex] = useState<number | null>(null)
 
   useEffect(() => {
-    setPosition(position)
     if (mapRef.current) {
       mapRef.current.setView(position)
+      mapRef.current.setZoom(18);
     }
   }, [position])
-  //UPDATES MAP POSITION WHEN CLICK 'FIND'
 
   const saveNewPath = () => {
     setPathsHistory(
@@ -52,11 +45,11 @@ export const MapLayer = ({ searchBar, historyBar }: Props) => {
         : (alert('Please insert a starting point'), pathsHistory),
     )
     setSinglePathHistory([])
-    setSelectedPathIndex(pathsHistory.length + 1) // update selected path index when new path is added
+    setSelectedPathIndex(pathsHistory.length + 1)
   }
 
   const LocationMarker = () => {
-    const map = useMapEvents({
+    const path = useMapEvents({
       click(e: any) {
         const newLocationHistory = { lat: e.latlng.lat, lng: e.latlng.lng }
         setSinglePathHistory([...singlePathHistory, newLocationHistory])
@@ -85,13 +78,7 @@ export const MapLayer = ({ searchBar, historyBar }: Props) => {
               key={i}
               position={[marker.lat, marker.lng]}
               interactive={false}
-              icon={
-                new Icon({
-                  iconUrl: markerIconPng,
-                  iconSize: [25, 41],
-                  iconAnchor: [12, 41],
-                })
-              }
+              icon={new Icon({iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41],})}
             />
           ))
         : null
@@ -100,7 +87,7 @@ export const MapLayer = ({ searchBar, historyBar }: Props) => {
       singlePathHistory.length > 1 ? (
         <Polyline
           positions={singlePathHistory}
-          pathOptions={{ color: '#9100ff', weight: 3 }} //what other path options?
+          pathOptions={{ color: '#9100ff', weight: 3 }}
         />
       ) : null
 
@@ -137,15 +124,8 @@ export const MapLayer = ({ searchBar, historyBar }: Props) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
       </MapContainer>
-      {searchBar && (
-        <GeoForm setPosition={setPosition} saveNewPath={saveNewPath} />
-      )}
-      {historyBar && (
-        <HistoryBar
-          pathsHistory={pathsHistory}
-          setLocationMarkerKey={setSelectedPathIndex}
-        />
-      )}
+      {searchBar && (<GeoForm setPosition={setPosition} saveNewPath={saveNewPath} />)}
+      {historyBar && (<HistoryBar pathsHistory={pathsHistory} setLocationMarkerKey={setSelectedPathIndex}/>)}
     </S.Wrapper>
   )
 }

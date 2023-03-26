@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import { Search } from '@styled-icons/bootstrap/Search'
-import { History } from '@styled-icons/material-sharp/History'
 import { PinAngle } from '@styled-icons/bootstrap/PinAngle'
 import { LocationPin } from '@styled-icons/entypo/LocationPin'
 
