@@ -1,5 +1,10 @@
 # pix4D-project
 
-Please run npm i
+run NPM I
 
 This is an implementation of the Pix4D assignment.
+
+## NOTE: ##
+'styled-icons' could take a while to install 
+
+
