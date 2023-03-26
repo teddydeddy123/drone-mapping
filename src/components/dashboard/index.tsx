@@ -10,9 +10,9 @@ export const Dashboard = () => {
   const [isNewVisitor, setIsNewVisitor] = useState(false)
 
   useEffect(() => {
-    const visits = localStorage.getItem('visits')
+    const visits = localStorage.getItem('hasVisited')
     if (!visits) {
-      localStorage.setItem('visits', 'visited')
+      localStorage.setItem('hasVisited', 'visited')
       setIsNewVisitor(true)
       setSearchBar(false)
     }
